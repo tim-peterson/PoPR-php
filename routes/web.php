@@ -13,10 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
 });
-
+*/
 use App\Http\Controllers\CompanyCRUDController;
 
 Route::resource('/companies', CompanyCRUDController::class);
+
+
+use App\Http\Controllers\ProjectController;
+
+Route::resource('/', ProjectController::class);
