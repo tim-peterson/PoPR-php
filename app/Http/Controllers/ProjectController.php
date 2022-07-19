@@ -41,11 +41,13 @@ class ProjectController extends Controller
 
 
 
-    $request->validate([
+    /*$request->validate([
     'name' => 'required',
     'email' => 'required',
     //'address' => 'required'
     ]);
+
+    */
     $project = new Project;
 
 

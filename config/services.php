@@ -31,4 +31,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'twitter' => [
+        'client_id' => env('twitter_client_key'),
+        'client_secret' => env('twitter_client_secret'),
+        'redirect' => 'http://localhost:8000/callback/twitter',
+    ],
 ];

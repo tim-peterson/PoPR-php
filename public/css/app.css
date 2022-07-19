@@ -1,5 +1,8 @@
 .btn {
-    border: 0 !important;
+    border: gray !important;
     background-color: white !important;
     color: black !important;
+}
+.error{
+    color:red;
 }
