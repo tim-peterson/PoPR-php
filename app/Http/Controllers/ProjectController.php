@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -17,9 +18,11 @@ class ProjectController extends Controller
     */
     public function index()
     {
+        $projects = Project::where('created_at', '>=', \Carbon\Carbon::now()->startOfMonth())->orderBy('created_at', 'desc')->paginate(30);
+
     //$data['projects'] = Project::orderBy('id','desc')->paginate(5);
-    //return view('projects.index', $data);
-    return view('projects.create');
+    return view('projects', compact('projects'));
+    //return view('projects.create');
     }
     /**
     * Show the form for creating a new resource.
@@ -39,19 +42,15 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
 
-
-
-    /*$request->validate([
-    'name' => 'required',
-    'email' => 'required',
-    //'address' => 'required'
+    $request->validate([
+    //'file' => 'required',
+    'title' => 'required',
+    'link' => 'required'
     ]);
 
-    */
     $project = new Project;
 
-
-    $uploadedFile = $request->file('name');
+/*    $uploadedFile = $request->file('file');
     $filename = time().$uploadedFile->getClientOriginalName();
 
     Storage::disk('s3')->putFileAs(
@@ -60,17 +59,20 @@ class ProjectController extends Controller
       $filename
     );
 
-
-    //Storage::disk('s3')->put('avatars/1', $request->name);
-
-
-    $project->name = $filename;
-    $project->email = $request->email;
+    $project->file = $filename;
     $project->s3_link = 'files/'.$filename;
+*/
+    $project->title = $request->title;
+    $project->link = $request->link;
+   // $project->file = $request->link;
+   // $project->email = $request->link;
+    $project->description = $request->title;
+   // $project->email = $request->email;
+
 
    // $project->address = $request->address;
     $project->save();
-    return redirect()->route('index')
+    return redirect()->route('projects.index')
     ->with('success','Project has been created successfully.');
     }
     /**
@@ -103,14 +105,14 @@ class ProjectController extends Controller
     public function update(Request $request, $id)
     {
     $request->validate([
-    'name' => 'required',
-    'email' => 'required',
-    'address' => 'required',
+    'link' => 'required',
+    'title' => 'required',
+    //'description' => 'required',
     ]);
     $project = Project::find($id);
-    $project->name = $request->name;
-    $project->email = $request->email;
-    $project->address = $request->address;
+    $project->link = $request->link;
+    $project->title = $request->title;
+    //$project->description = $request->description;
     $project->save();
     return redirect()->route('projects.index')
     ->with('success','Project Has Been updated successfully');
@@ -126,6 +128,80 @@ class ProjectController extends Controller
     $project->delete();
     return redirect()->route('projects.index')
     ->with('success','Project has been deleted successfully');
+    }
+
+
+
+    /**
+     * Switch the current team the user is viewing.
+     *
+     * @param  Request  $request
+     * @param  \Laravel\Spark\Team  $team
+     * @return Response
+     */
+    public function reviewCurrentProject(Request $request, $project)
+    {
+
+         $user = \Auth::user();
+            if(!$user){
+                return redirect('/login');
+            }
+
+            $myProject = Project::where("id", $project)->where("user_id", $user->id)->first();
+
+            if(is_null($myProject)){
+
+                $myReview = Review::where("project_id", $project)->where("user_id", $user->id)->first();
+
+                if(is_null($myReview)){
+                    return redirect('/review/'.$project.'/new');
+                }
+                return redirect('/review/'.$project.'/edit');
+            }
+            else{
+                return 'Cant review own project';
+
+                return redirect('/');
+            }
+
+
+          if($request->user()->id ->onTeam($team)==false)
+/*        if($request->user()->onTeam($team)==false){
+
+            $team->users()->attach($request->user(), [
+                'role' => 'reviewer',
+                'comment' => '',
+                'significance' => null,
+                'innovation' => null,
+                'investigator' => null,
+                'approach' => null,
+                'environment' => null,
+                'overall' => null,
+                'accept' => null,
+                'created_at' => \Carbon\Carbon::now()
+            ]);
+
+            event(new \Laravel\Spark\Events\Teams\TeamMemberAdded($team, $request->user()));
+
+            $team_user = $team->users();
+
+            foreach($team_user as $user){
+                if($user->id==$request->user()->id){
+                    $request->user()->switchToTeam($team);
+                    break;
+                }
+            }
+
+
+        }
+        else $request->user()->switchToTeam($team);
+*/
+
+        return redirect('/reviews/'.$project); //back();
+
+        //return redirect('/settings/manuscripts/'.$team->id.'#/membership'); //back();
+
+
     }
 
 }

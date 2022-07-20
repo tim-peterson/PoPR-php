@@ -13,10 +13,44 @@ use App\Http\Controllers\TwitterController;
 |
 */
 
-/*Route::get('/', function () {
-    return view('welcome');
+
+
+
+
+use App\Models\Project;
+Route::get('/', function () {
+
+
+    $items = Project::where('created_at', '>=', \Carbon\Carbon::now()->startOfMonth())->orderBy('created_at', 'desc')->paginate(30);
+
+    //$data['projects'] = Project::orderBy('id','desc')->paginate(5);
+    return view('pages._biorxiv', compact('items'));
+
+    //return view('projects.index');
 });
-*/
+
+
+
+
+use App\Http\Controllers\ReviewController;
+
+Route::resource('/reviews', ReviewController::class);
+
+
+Route::get('/about', function () {
+
+    return view('pages.about');
+});
+
+
+Route::get('/donate', function () {
+
+
+
+    return view('pages.index');
+});
+
+
 use App\Http\Controllers\CompanyCRUDController;
 
 Route::resource('/companies', CompanyCRUDController::class);
@@ -24,8 +58,16 @@ Route::resource('/companies', CompanyCRUDController::class);
 
 use App\Http\Controllers\ProjectController;
 
-Route::resource('/', ProjectController::class);
 
+Route::resource('/projects', ProjectController::class);
+
+Route::get('/projects/{project}/review', [ProjectController::class, 'reviewCurrentProject']);
+
+Route::get('/review/{project}/new', [ReviewController::class, 'create']);
+Route::get('/review/{project}/edit/{review}', [ReviewController::class, 'show']);
+
+Route::post('/review/{project}/edit/', [ReviewController::class, 'store']);
+Route::put('/reviews/{review}', [ReviewController::class, 'update']);
 
 
 use App\Http\Controllers\MainController;

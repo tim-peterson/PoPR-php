@@ -58,4 +58,26 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+
+            /**
+     * Get all of the user's reviews.
+     */
+    public function projects()
+    {
+        return $this->hasMany(\App\Project::class)->orderBy('created_at', 'asc');
+    }
+
+
+        /**
+     * Get all of the user's reviews.
+     */
+    public function reviews()
+    {
+        return $this->hasMany(\App\Review::class)->orderBy('created_at', 'asc');
+    }
+
+
+
+
 }

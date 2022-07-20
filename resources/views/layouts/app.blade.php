@@ -8,35 +8,38 @@
         <title>@yield('title')</title>
     </head>
     <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <a class="pull-left" href="/"><h3>Proof of peer review</h3></a>
-{{--
-                <a class="btn" href="{{ url('auth/redirect') }}">
-                    Login with Twitter
-                </a>
-
-                <a class="btn" href="{{ url('login/twitter') }}">
-                    Login with Twitter a
-                </a>
---}}
 
 
-@if (auth()->user())
-    // the user is authenticated
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+                <!-- Branding Image -->
+                <a class="navbar-brand" href="/">Proof Of Peer Review </a>
+
+                <div class="navbar-right" >
+                    <a href="/about" class="navbar-link" >FAQ</a>
+
+                    @if (auth()->user())
+                       {{-- // the user is authenticated --}}
+                    @else
+                        <a class="navbar-link" href="/login">Login</a>
+                        <!--a href="/register" class="navbar-link">Register</a-->
+                    @endif
+                    <a href="/donate" class="navbar-link" >Donate</a>
+
+                                    {{--
+                                <a class="btn" href="{{ url('auth/redirect') }}">
+                                    Login with Twitter
+                                </a>
+
+                                <a class="btn" href="{{ url('login/twitter') }}">
+                                    Login with Twitter a
+                                </a>
+                        --}}
 
 
-    @else
-     <a href="/login">Login</a>
-     <!--a href="/register">Register</a-->
-@endif
-
-
+                </div>
             </div>
-        </div>
-    </div>
-
+        </nav>
 
         <div class="container">
             @yield('content')
