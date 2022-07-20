@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('reviews', function (Blueprint $table) {
             //
-            $table->text('description');
+            //$table->text('description');
             $table->string('title');
         });
     }
