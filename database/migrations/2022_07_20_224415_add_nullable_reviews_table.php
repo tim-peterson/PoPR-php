@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('reviews', function (Blueprint $table) {
             //
-            $table->string('s3_link')->nullable()->change();
+            //$table->string('s3_link')->nullable()->change();
             $table->string('name')->nullable()->change();
             //$table->string('email')->nullable()->change();
 
