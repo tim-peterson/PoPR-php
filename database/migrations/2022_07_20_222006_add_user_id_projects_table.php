@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('projects', function (Blueprint $table) {
             //
-            $table->integer('user_id')->index();
+           // $table->integer('user_id')->index();
         });
     }
 
