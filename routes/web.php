@@ -67,7 +67,7 @@ Route::get('/review/{project}/new', [ReviewController::class, 'create']);
 Route::get('/review/{project}/edit/{review}', [ReviewController::class, 'show']);
 
 Route::post('/review/{project}/edit/', [ReviewController::class, 'store']);
-Route::put('/reviews/{review}', [ReviewController::class, 'update']);
+Route::post('/reviews/{review}', [ReviewController::class, 'update']);
 
 
 use App\Http\Controllers\MainController;

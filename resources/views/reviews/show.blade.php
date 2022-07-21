@@ -7,7 +7,7 @@
 {{ $project->link }}
 
 
-<form action="{{ route('reviews.update' , $review->id) }}" method="PUT" enctype="multipart/form-data">
+<form action="{{ route('reviews.update' , $review->id) }}" method="POST" enctype="multipart/form-data">
 @csrf
 
 <input hidden name="project_id" value="{{ $project->id }}">

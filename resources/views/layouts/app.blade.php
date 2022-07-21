@@ -41,7 +41,13 @@
             </div>
         </nav>
 
+
+
         <div class="container">
+
+            @if(session('success'))
+            <small class="success">{{session('success')}}</small>
+            @endif
             @yield('content')
         </div>
 

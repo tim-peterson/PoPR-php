@@ -99,16 +99,16 @@ class ReviewController extends Controller
     public function update(Request $request, $id)
     {
     $request->validate([
-    'name' => 'required',
-    'email' => 'required',
-    'address' => 'required',
+    'title' => 'required',
+    'description' => 'required',
+   // 'address' => 'required',
     ]);
     $review = Review::find($id);
-    $review->name = $request->name;
-    $review->email = $request->email;
-    $review->address = $request->address;
+    $review->title = $request->title;
+    $review->description = $request->description;
+
     $review->save();
-    return redirect()->route('reviews.index')
+    return redirect()->route('projects.index')
     ->with('success','Review Has Been updated successfully');
     }
     /**
