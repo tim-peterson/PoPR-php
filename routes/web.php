@@ -70,6 +70,10 @@ Route::post('/review/{project}/edit/', [ReviewController::class, 'store']);
 Route::post('/reviews/{review}', [ReviewController::class, 'update']);
 
 
+Route::get('/me', [UserController::class, 'index']);
+
+
+
 use App\Http\Controllers\MainController;
 
 Route::get('login', [MainController::class, 'index'])->name('login');
@@ -90,7 +94,7 @@ Route::get('/login/twitter/callback', [App\Http\Controllers\TwitterController::c
 //Facebook
 
 
-
+/*
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
@@ -128,7 +132,7 @@ Route::get('auth/callback/twitter', [TwitterController::class, 'cbTwitter']);
 
 //Route::get('url', 'controller@method')->middleware('auth:api');
 
-
+/*
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -139,3 +143,4 @@ Route::middleware([
     })->name('dashboard');
 });
 
+*/
