@@ -57,8 +57,14 @@ class MainController extends Controller
     public function dashboard()
     {
 
+
       if(Auth::check()){
-        return view('dashboard');
+
+        $projects = Auth::user()->projects;
+        $reviews = Auth::user()->reviews;
+
+
+        return view('dashboard', compact('projects', 'reviews'));
       }
        return Redirect::to("login")->withSuccess('Opps! You do not have access');
     }

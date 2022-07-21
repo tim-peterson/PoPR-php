@@ -32,6 +32,46 @@ Route::get('/', function () {
 
 
 
+Route::post('/create-checkout-session',function(){
+
+
+     require '../vendor/autoload.php';
+     \Stripe\Stripe::setApiKey(env("STRIPE_SECRET"));
+
+     header('Content-Type: application/json');
+
+     $YOUR_DOMAIN = 'http://localhost:8000';
+
+     $checkout_session = \Stripe\Checkout\Session::create([
+       'line_items' => [[
+         # TODO: replace this with the `price` of the product you want to sell
+         'price' => "price_1LO4cxGcjw5X7MJYQSgP77r3", //$250
+         'quantity' => 1,
+       ]],
+       'payment_method_types' => [
+         'card',
+       ],
+       'mode' => 'payment',
+       'success_url' => $YOUR_DOMAIN . '/stripe-success',
+       'cancel_url' => $YOUR_DOMAIN . '/stripe-cancel',
+     ]);
+
+     header("HTTP/1.1 303 See Other");
+     header("Location: " . $checkout_session->url);
+ });
+
+
+Route::get('/stripe-success', function (Request $request) {
+
+    dd($request);
+});
+
+Route::get('/stripe-cancel', function (Request $request) {
+
+    dd("cancel");
+});
+
+
 use App\Http\Controllers\ReviewController;
 
 Route::resource('/reviews', ReviewController::class);
@@ -49,6 +89,15 @@ Route::get('/donate', function () {
 
     return view('pages.index');
 });
+
+
+use App\Http\Controllers\PaymentsController;
+
+Route::post('/charge/{project_id}', [PaymentsController::class, 'charge']);
+
+Route::get('stripe/webhook', [PaymentsController::class, 'stripeWebhook']);
+
+
 
 
 use App\Http\Controllers\CompanyCRUDController;

@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
-
+use Laravel\Cashier\Billable;
 class User extends Authenticatable
 {
     use HasApiTokens;
@@ -17,6 +17,7 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use Billable;
 
     /**
      * The attributes that are mass assignable.
@@ -65,7 +66,7 @@ class User extends Authenticatable
      */
     public function projects()
     {
-        return $this->hasMany(\App\Project::class)->orderBy('created_at', 'asc');
+        return $this->hasMany(Project::class)->orderBy('created_at', 'asc');
     }
 
 
@@ -74,7 +75,7 @@ class User extends Authenticatable
      */
     public function reviews()
     {
-        return $this->hasMany(\App\Review::class)->orderBy('created_at', 'asc');
+        return $this->hasMany(Review::class)->orderBy('created_at', 'asc');
     }
 
 

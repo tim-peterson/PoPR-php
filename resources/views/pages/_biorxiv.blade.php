@@ -17,7 +17,7 @@
   @foreach ($items as $key => $item)
     <div class="item">
       <h4 style="margin-bottom:5px">{{ $items->firstItem() + $key }}.
-      	<a role="button" data-toggle="collapse" href="#collapseExample-{{ $item->id }}" >{{ $item->title }}</a>
+      	<a role="button" data-bs-toggle="collapse" href="#collapseExample-{{ $item->id }}" >{{ $item->title }}</a>
       </h4>
       <p>
       	<small title="Posted {{ $item->created_at->diffForHumans() }} "> {{ $item->created_at->format('j F Y') }} |

@@ -43,7 +43,7 @@ class ProjectController extends Controller
     {
 
     $request->validate([
-    //'file' => 'required',
+    'description' => 'required',
     'title' => 'required',
     'link' => 'required'
     ]);
@@ -66,7 +66,7 @@ class ProjectController extends Controller
     $project->link = $request->link;
    // $project->file = $request->link;
    // $project->email = $request->link;
-    $project->description = $request->title;
+    $project->description = $request->description;
    // $project->email = $request->email;
 
 
@@ -107,12 +107,12 @@ class ProjectController extends Controller
     $request->validate([
     'link' => 'required',
     'title' => 'required',
-    //'description' => 'required',
+    'description' => 'required',
     ]);
     $project = Project::find($id);
     $project->link = $request->link;
     $project->title = $request->title;
-    //$project->description = $request->description;
+    $project->description = $request->description;
     $project->save();
     return redirect()->route('projects.index')
     ->with('success','Project Has Been updated successfully');

@@ -19,6 +19,15 @@
     </div>
 
     <div class="form-group">
+        <label>Description</label>
+        <textarea type="text" name="description" class="form-control" placeholder="Description" rows="3"></textarea>
+        @error('description')
+            <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+        @enderror
+    </div>
+
+
+    <div class="form-group">
         <label>Link</label>
         <input type="text" name="link" class="form-control" placeholder="Link">
         @error('link')
@@ -27,14 +36,6 @@
     </div>
 
 {{--
-    <div class="form-group">
-        <label>Description</label>
-        <textarea type="text" name="description" class="form-control" placeholder="Description" rows="3"></textarea>
-        @error('description')
-            <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-        @enderror
-    </div>
-
     <div class="form-group">
         <label>File (pdf only)</label>
         <input type="file" name="name" class="form-control-file" placeholder="File">
