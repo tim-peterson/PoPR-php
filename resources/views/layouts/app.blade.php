@@ -30,7 +30,7 @@
                        {{-- // the user is authenticated --}}
                     @else
                         <a class="navbar-link" href="/login">Login</a>
-                        <!--a href="/register" class="navbar-link">Register</a-->
+                        <a href="/register" class="navbar-link">Register</a>
                     @endif
                     <a href="/donate" class="navbar-link" >Donate</a>
 
@@ -57,6 +57,23 @@
             <small class="success">{{session('success')}}</small>
             @endif
             @yield('content')
+
+
+            @include('layouts.footer')
+            <!-- Application Level Modals -->
+            @if (Auth::check())
+            {{--
+                @include('modals.notifications')
+
+                @include('modals.session-expired')
+
+--}}
+            @endif
+
+            @include('modals.support')
+
+
+
         </div>
 
         <div

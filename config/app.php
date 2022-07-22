@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => "Proof Of Peer Review", //env('APP_NAME', 'Laravel'),
 
     /*
     |--------------------------------------------------------------------------

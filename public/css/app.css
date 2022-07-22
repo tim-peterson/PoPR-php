@@ -1,19 +1,88 @@
+/*
+@red: rgb(255,59,48);
+@green: rgb(76,217,100);
+@blue: rgb(0,122,255);
+@orange: rgb(255,149,0);
+@white: #fff;
+@gray: rgb(229,229,229);
+@gray-md: #a4aaae;
+@text-color: #636b6f;
+@panel-border-color: #d3e0e9;
+@blue-md: #2a7ae2;
+@black: #333333;
+*/
+
+body  {
+
+    font-size: 14px;
+    line-height: 1.6;
+    color: #636b6f;
+
+    font-weight: 300;
+}
+
+.list-group, .list-group-item{
+    color: #636b6f;
+}
+.list-group-item{
+    border:none;
+}
+.darker-gray-txt{
+    color: #333333;
+    font-weight: 400;
+}
+
+.navbar-brand{
+    font-size:18px;
+}
 .btn {
     border: 1px solid #636b6f;
     background-color: white ;
 
 }
+.btn-primary, .btn-primary:hover, .btn-link, .StripeElement {
+    color: #636b6f;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+}
+
+
+.btn-primary:hover, .btn-primary-outline:hover, .btn-primary-outline:focus, .btn-primary-outline.focus, .btn-primary-outline:hover, .btn-primary-outline:active, .btn-primary-outline.active, .open > .dropdown-toggle.btn-primary-outline {
+
+    background-color: #eeeeee;
+    /* border: 1px solid transparent; */
+}
+
+
+.btn-link {
+    border: 1px solid transparent;
+}
 .error{
-    color:red;
+    color:rgb(255,59,48);
 }
 
 .success{
-    color:green;
+    color:rgb(76,217,100);
 }
 
-a {
-    color: black;
+
+a, a:hover, a:focus, .btn-link:hover {
+    color: #333333;
 }
+
+footer * {
+    color: #a4aaae;
+}
+
+a, .btn-link {
+
+    text-decoration:none;
+}
+a:hover, a:focus {
+
+    text-decoration: underline;
+}
+
 .navbar-inverse .navbar-brand {
     color: #a4aaae;
     font-weight: 400;
@@ -28,4 +97,29 @@ a {
 
 .navbar-inverse .navbar-link {
     color: #a4aaae;
+}
+
+.navbar-inverse .navbar-link:hover {
+    color: #969ea2;
+}
+
+.form-horizontal .control-label {
+    text-align: right;
+    margin-bottom: 0;
+    padding-top: 7px;
+}
+
+.control-label, .col-form-label {
+    font-weight: 300;
+}
+.form-control {
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+    box-shadow: none;
+    color: #636b6f;
+}
+
+.form-control:focus {
+    border-color: #d3e0e9;
+    box-shadow: none;
 }
